@@ -31,11 +31,12 @@ namespace Multilingual_ATM
                     if (item.Number == accountNumber && item.Pin == secretPin)
                     {
                         owner = item;
-                        _logged = true;
+                       _logged = true;
                         Operation(owner);
-                        return;
                     }
-
+                }
+                if (!_logged)
+                {
                     Console.WriteLine("Invalid login details please try again...");
                     Login();
                 }
