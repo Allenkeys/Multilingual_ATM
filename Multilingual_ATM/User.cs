@@ -16,7 +16,7 @@ namespace Multilingual_ATM
             accounts.Add(account2);
             accounts.Add(account3);
             Accounts owner = new Accounts("test");
-
+            bool _logged = false;
             
             void Login()
             {
@@ -31,6 +31,7 @@ namespace Multilingual_ATM
                     if (item.Number == accountNumber && item.Pin == secretPin)
                     {
                         owner = item;
+                        _logged = true;
                         Operation(owner);
                         return;
                     }
@@ -39,11 +40,14 @@ namespace Multilingual_ATM
                     Login();
                 }
             }
-            Login();
-            
+            if (!_logged)
+            {
+                Login();
+            }
 
             void Operation(Accounts owner)
             {
+                
                 DateTime date = DateTime.Now;
 
                 Console.WriteLine($"Awesome {owner.AccountName}, please choose an operation");
@@ -94,7 +98,11 @@ namespace Multilingual_ATM
                             break;
 
                         case 4: owner.AccountStatement(); Operation(owner); break;
-                        case 5: Login(); Operation(owner); break;
+                        case 5: 
+                            Login(); 
+                            Operation(owner);
+                            _logged = false;
+                            break;
                         default:
                             break;
                     }
@@ -105,7 +113,7 @@ namespace Multilingual_ATM
                     Operation(owner);
                 }
             }
-            
+            Operation(owner);  
 
         }
     }
