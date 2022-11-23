@@ -62,6 +62,10 @@ namespace Multilingual_ATM
             {
                 Console.WriteLine("Insufficient balance...");
             }
+            else if(recieverAccountNumber == Number)
+            {
+                Console.WriteLine("Sorry, can not transfer to self...");
+            }
             else
             {
                 Transactions transfer = new Transactions(-amount, date, $"{statement} - transfer to: {recieverAccountNumber}");

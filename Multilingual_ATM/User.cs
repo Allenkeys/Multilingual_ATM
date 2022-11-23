@@ -101,7 +101,7 @@
                                         item.transactions.Add(transfer);
                                     }
                                 }
-                               Operation(owner);
+                                Operation(owner);
                             }
                             else
                             {
@@ -112,7 +112,6 @@
                         case 4: owner.AccountStatement(); Operation(owner); break;
                         case 5:
                             Login();
-                            Operation(owner);
                             _logged = false;
                             break;
                         default:
@@ -125,7 +124,7 @@
                     Operation(owner);
                 }
             }
-            Operation(owner);
+            //Operation(owner);
 
         }
     }
