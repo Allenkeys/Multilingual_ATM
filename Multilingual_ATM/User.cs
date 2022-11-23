@@ -84,13 +84,15 @@
 
                             Console.WriteLine("Please enter message");
                             var message = Console.ReadLine();
+                            if (recieverAccount == String.Empty)
+                            {
+                                Console.WriteLine("Transfer fields can not be empty");
+                                Operation(owner);
+                            }
 
                             if (double.TryParse(transferAmount, out double transferAmountInput))
                             {
-                                if (message == "" || recieverAccount == "")
-                                {
-                                    Console.WriteLine("transfer fields can not be empty");
-                                }
+                                
                                 owner.Transfer(transferAmountInput, date, message, recieverAccount);
 
                                 foreach (var item in accounts)
@@ -124,7 +126,6 @@
                     Operation(owner);
                 }
             }
-            //Operation(owner);
 
         }
     }

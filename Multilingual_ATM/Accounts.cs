@@ -66,6 +66,10 @@ namespace Multilingual_ATM
             {
                 Console.WriteLine("Sorry, can not transfer to self...");
             }
+            else if(recieverAccountNumber.Length < 10)
+            {
+                Console.WriteLine("Invalid account number");
+            }
             else
             {
                 Transactions transfer = new Transactions(-amount, date, $"{statement} - transfer to: {recieverAccountNumber}");
