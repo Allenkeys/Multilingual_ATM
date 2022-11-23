@@ -8,7 +8,7 @@ namespace Multilingual_ATM
         public string Number { get; }
         public string Pin { get; }
         public string AccountName { get; }
-        private double Balance { 
+        private double Balance {
             get
             {
                 double balance = 360.00;
@@ -21,7 +21,7 @@ namespace Multilingual_ATM
         }
         private static int _accountNumberSeed = 1234567890;
         private static int _pin = 1234;
-        private List<Transactions> transactions = new List<Transactions>();
+        public List<Transactions> transactions = new List<Transactions>();
 
 
         public Accounts(string accountName)
@@ -67,9 +67,7 @@ namespace Multilingual_ATM
                 Transactions transfer = new Transactions(-amount, date, $"{statement} - transfer to: {recieverAccountNumber}");
                 transactions.Add(transfer);
                 Console.WriteLine($"Success: sum of {amount} has been transfered to {recieverAccountNumber}");
-
             }
-
         }
 
         public void Checkbalance()

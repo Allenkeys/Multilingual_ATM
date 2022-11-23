@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Multilingual_ATM
+﻿namespace Multilingual_ATM
 {
     internal class User
     {
@@ -9,7 +7,7 @@ namespace Multilingual_ATM
 
         public static void Run()
         {
-            Accounts account1 = new Accounts("Joshua");
+            Accounts account1 = new Accounts("Josh");
             Accounts account2 = new Accounts("Harryson");
             Accounts account3 = new Accounts("Alex");
             accounts.Add(account1);
@@ -17,7 +15,7 @@ namespace Multilingual_ATM
             accounts.Add(account3);
             Accounts owner = new Accounts("test");
             bool _logged = false;
-            
+
             void Login()
             {
                 Console.WriteLine("Welcome, please login");
@@ -31,7 +29,7 @@ namespace Multilingual_ATM
                     if (item.Number == accountNumber && item.Pin == secretPin)
                     {
                         owner = item;
-                       _logged = true;
+                        _logged = true;
                         Operation(owner);
                     }
                 }
@@ -48,7 +46,7 @@ namespace Multilingual_ATM
 
             void Operation(Accounts owner)
             {
-                
+
                 DateTime date = DateTime.Now;
 
                 Console.WriteLine($"Awesome {owner.AccountName}, please choose an operation");
@@ -89,8 +87,21 @@ namespace Multilingual_ATM
 
                             if (double.TryParse(transferAmount, out double transferAmountInput))
                             {
+                                if (message == "" || recieverAccount == "")
+                                {
+                                    Console.WriteLine("transfer fields can not be empty");
+                                }
                                 owner.Transfer(transferAmountInput, date, message, recieverAccount);
-                                Operation(owner);
+
+                                foreach (var item in accounts)
+                                {
+                                    if (item.Number == recieverAccount)
+                                    {
+                                        Transactions transfer = new(transferAmountInput, date, $"{message} - transfer from: {owner.AccountName}");
+                                        item.transactions.Add(transfer);
+                                    }
+                                }
+                               Operation(owner);
                             }
                             else
                             {
@@ -99,8 +110,8 @@ namespace Multilingual_ATM
                             break;
 
                         case 4: owner.AccountStatement(); Operation(owner); break;
-                        case 5: 
-                            Login(); 
+                        case 5:
+                            Login();
                             Operation(owner);
                             _logged = false;
                             break;
@@ -114,7 +125,7 @@ namespace Multilingual_ATM
                     Operation(owner);
                 }
             }
-            Operation(owner);  
+            Operation(owner);
 
         }
     }
